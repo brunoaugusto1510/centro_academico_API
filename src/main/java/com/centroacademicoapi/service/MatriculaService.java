@@ -61,4 +61,9 @@ public class MatriculaService {
     public List<Matricula> listarTodas() {
         return matriculaRepository.findAll();
     }
+
+//    Busca o "boletim" de um aluno específico
+    public List<Matricula> buscarPorAluno(Long idAluno) {
+        return matriculaRepository.findByAlunoId(idAluno);
+    }
 }
