@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.clienteapi</groupId>
-	<artifactId>Lista_API_Exercicio_2</artifactId>
+	<artifactId>CentroAcademico</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Lista_API_Exercicio_2</name>
 	<description>Um projeto de clientes em uma maravilhosa estrutura</description>

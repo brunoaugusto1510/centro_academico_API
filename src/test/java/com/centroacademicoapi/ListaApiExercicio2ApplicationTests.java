@@ -1,4 +1,4 @@
-package com.clienteapi;
+package com.centroacademicoapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
