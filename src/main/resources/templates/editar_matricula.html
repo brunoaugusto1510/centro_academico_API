@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Matrícula</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+<h3>Editando: <span th:text="${matricula.disciplina.nome}"></span></h3>
+<p>Aluno: <span th:text="${matricula.aluno.nome}"></span></p>
+<hr>
+
+<form th:action="@{/sistema/matricula/salvar}" method="POST">
+
+    <input type="hidden" name="idMatricula" th:value="${matricula.id}" />
+    <input type="hidden" name="idAluno" th:value="${matricula.aluno.id}" />
+
+    <div class="mb-3">
+        <label for="nota" class="form-label">Nota:</label>
+        <input type="number" step="0.1" class="form-control" id="nota" name="nota" th:value="${matricula.nota}">
+    </div>
+
+    <div class="mb-3">
+        <label for="faltas" class="form-label">Faltas:</label>
+        <input type="number" class="form-control" id="faltas" name="faltas" th:value="${matricula.faltas}">
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a th:href="@{/sistema/aluno/{id}/boletim(id=${matricula.aluno.id})}" class="btn btn-secondary">Cancelar</a>
+
+</form>
+
+</body>
+</html>

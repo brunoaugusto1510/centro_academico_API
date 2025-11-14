@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional; // Adicione este import
 
 @Service
 public class MatriculaService {
@@ -65,5 +66,19 @@ public class MatriculaService {
 //    Busca o "boletim" de um aluno específico
     public List<Matricula> buscarPorAluno(Long idAluno) {
         return matriculaRepository.findByAlunoId(idAluno);
+    }
+
+    public Optional<Matricula> buscarPorId(Long idMatricula) {
+        return matriculaRepository.findById(idMatricula);
+    }
+
+    // Salva as mudanças do formulário (nota e faltas)
+    public Matricula salvarEdicao(Long idMatricula, double novaNota, int novasFaltas) {
+        Matricula matricula = matriculaRepository.findById(idMatricula)
+                .orElseThrow(() -> new RuntimeException("Matrícula não encontrada"));
+
+        matricula.setNota(novaNota);
+        matricula.setFaltas(novasFaltas);
+        return matriculaRepository.save(matricula);
     }
 }
