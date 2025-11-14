@@ -28,7 +28,7 @@ public class WebController {
         List<Aluno> lista = alunoService.listarTodos();
         // "addAttribute" manda dados do Java para o HTML
         model.addAttribute("alunos", lista);
-        return "index_aluno"; // Vai procurar o arquivo alunos.html
+        return "index_aluno";
     }
 
     // Página de Boletim de um Aluno
