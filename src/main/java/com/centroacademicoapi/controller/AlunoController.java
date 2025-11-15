@@ -16,7 +16,7 @@ public class AlunoController {
     private AlunoRepository alunoRepository;
 
     @Autowired
-    private MatriculaService matriculaService; // Injeção nova aqui!
+    private MatriculaService matriculaService; 
 
     @GetMapping
     public List<Aluno> listarTodos() {
@@ -28,7 +28,6 @@ public class AlunoController {
         return alunoRepository.save(aluno);
     }
 
-    // --- NOVO ENDPOINT: BOLETIM ---
     @GetMapping("/{id}/boletim")
     public List<Matricula> verBoletim(@PathVariable Long id) {
         // Retorna apenas as matrículas daquele aluno específico

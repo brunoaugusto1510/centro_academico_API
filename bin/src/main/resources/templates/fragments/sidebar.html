@@ -7,13 +7,13 @@
     <ul class="nav nav-pills flex-column gap-2">
         <li class="nav-item">
             <a th:href="@{/sistema/alunos}" class="nav-link"
-               th:classappend="${requestURI.startsWith('/sistema/alunos')} ? 'active' : ''">
+               th:classappend="${#httpServletRequest.requestURI.startsWith('/sistema/alunos')} ? 'active' : ''">
                 🧑‍🎓 Alunos
             </a>
         </li>
         <li class="nav-item">
             <a th:href="@{/sistema/disciplinas}" class="nav-link"
-               th:classappend="${requestURI.startsWith('/sistema/disciplinas')} ? 'active' : ''">
+               th:classappend="${#httpServletRequest.requestURI.startsWith('/sistema/disciplinas')} ? 'active' : ''">
                 📚 Disciplinas
             </a>
         </li>

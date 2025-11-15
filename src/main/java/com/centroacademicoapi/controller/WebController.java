@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Hidden;
 
 import java.util.List;
 
+@Hidden
 @Controller
 public class WebController {
 
@@ -29,7 +31,6 @@ public class WebController {
     @GetMapping("/sistema/alunos")
     public String listarAlunos(Model model) {
         List<Aluno> lista = alunoService.listarTodos();
-        // "addAttribute" manda dados do Java para o HTML
         model.addAttribute("alunos", lista);
         return "index_aluno";
     }
@@ -102,6 +103,33 @@ public class WebController {
     public String salvarDisciplina(@ModelAttribute Disciplina disciplina) {
         disciplinaService.salvar(disciplina);
         return "redirect:/sistema/disciplinas";
+    }
+    
+ // Mostra a tela para escolher a disciplina
+    @GetMapping("/sistema/aluno/{id}/matricular")
+    public String exibirFormularioMatricula(@PathVariable Long id, Model model) {
+        // 1. Pega o aluno (para saber quem estamos matriculando)
+        Aluno aluno = alunoService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        
+        // 2. Pega TODAS as disciplinas (para o dropdown)
+        List<Disciplina> disciplinas = disciplinaService.listarTodas();
+
+        model.addAttribute("aluno", aluno);
+        model.addAttribute("disciplinas", disciplinas);
+        
+        return "matricular_aluno"; // Nome do novo arquivo HTML
+    }
+
+    // Salva a nova matrícula
+    @PostMapping("/sistema/matricular")
+    public String salvarMatricula(@RequestParam Long idAluno, @RequestParam Long idDisciplina) {
+        
+        // 1. Reutiliza o serviço que já tínhamos (ele cuida da lógica)
+        matriculaService.matricular(idAluno, idDisciplina);
+        
+        // 2. Redireciona de volta para o boletim do aluno
+        return "redirect:/sistema/aluno/" + idAluno + "/boletim";
     }
 
 }
